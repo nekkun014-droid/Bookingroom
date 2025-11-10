@@ -130,6 +130,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ctrl->login($_POST);
         exit;
     }
+    if ($action === 'register') {
+        $ctrl = new AuthController();
+        $ctrl->register($_POST);
+        exit;
+    }
     if ($action === 'logout') {
         $ctrl = new AuthController();
         $ctrl->logout();
@@ -196,6 +201,8 @@ if ($action === 'login') {
     require __DIR__ . '/../app/views/auth/password_request.php';
 } elseif ($action === 'password_reset') {
     require __DIR__ . '/../app/views/auth/password_reset.php';
+} elseif ($action === 'register') {
+    require __DIR__ . '/../app/views/register.php';
 } elseif ($action === 'dashboard') {
     require __DIR__ . '/../app/views/dashboard.php';
 } elseif ($action === 'rooms') {

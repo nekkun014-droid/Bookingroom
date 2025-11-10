@@ -11,14 +11,16 @@
                 <?php endif; ?>
             </ul>
         </nav>
-        <div class="auth">
+        <div class="auth" aria-hidden="false">
             <?php if (!empty($_SESSION['user_id'])): ?>
                 <span class="greeting">Hi, <?php echo htmlspecialchars($_SESSION['user_name'] ?? ''); ?></span>
                 <form method="post" action="?action=logout" style="display:inline">
                     <button type="submit" class="btn btn--secondary">Logout</button>
                 </form>
             <?php else: ?>
-                <a href="?action=login" class="btn btn--primary">Login</a>
+                <!-- Intentionally hide Login/Register from header for a focused auth page UX.
+                     Users will be redirected to a dedicated login/register page. -->
+                <span class="sr-only">Not signed in</span>
             <?php endif; ?>
         </div>
     </div>

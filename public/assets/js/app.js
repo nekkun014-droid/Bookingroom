@@ -1,5 +1,22 @@
 // Minimal JS: modal, toast auto-hide, client-side validation and event delegation
 document.addEventListener('DOMContentLoaded', function(){
+    // small UX: toggle show/hide password for auth forms
+    document.querySelectorAll('.btn-toggle-pw').forEach(btn=>{
+        btn.addEventListener('click', function(e){
+            const container = btn.closest('.auth-card');
+            if (!container) return;
+            // find nearby password input (first one)
+            const pw = container.querySelector('input[type="password"]');
+            if (!pw) return;
+            if (pw.type === 'password') {
+                pw.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                pw.type = 'password';
+                btn.textContent = 'Show';
+            }
+        });
+    });
     // open booking modal
     document.querySelectorAll('.open-booking').forEach(btn=>{
         btn.addEventListener('click', e=>{

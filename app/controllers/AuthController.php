@@ -193,4 +193,59 @@ class AuthController
         $_SESSION['flash']['success'] = 'Password updated. You may now login.';
         header('Location: ?action=login');
     }
+
+    public function register($data)
+    {
+        // CSRF
+        if (!validate_csrf($data['_csrf'] ?? '')) {
+            $_SESSION['flash']['error'] = 'Invalid CSRF token.';
+            header('Location: ?action=register');
+            return;
+        }
+        $name = trim($data['name'] ?? '');
+        $email = trim($data['email'] ?? '');
+        $password = $data['password'] ?? '';
+        $password_confirm = $data['password_confirm'] ?? '';
+        if (!$name || !$email || !$password || !$password_confirm) {
+            $_SESSION['flash']['error'] = 'All fields are required.';
+            header('Location: ?action=register');
+            return;
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['flash']['error'] = 'Please provide a valid email.';
+            header('Location: ?action=register');
+            return;
+        }
+        if ($password !== $password_confirm) {
+            $_SESSION['flash']['error'] = 'Passwords do not match.';
+            header('Location: ?action=register');
+            return;
+        }
+        if (strlen($password) < 6) {
+            $_SESSION['flash']['error'] = 'Password must be at least 6 characters.';
+            header('Location: ?action=register');
+            return;
+        }
+        // check existing email
+        require_once __DIR__ . '/../models/User.php';
+        if (User::findByEmail($email)) {
+            $_SESSION['flash']['error'] = 'Email already registered. Please login or request password reset.';
+            header('Location: ?action=register');
+            return;
+        }
+        // create user (default role_id = 2)
+        $created = User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'role_id' => 2
+        ]);
+        if (!$created) {
+            $_SESSION['flash']['error'] = 'Failed to create account. Please try again.';
+            header('Location: ?action=register');
+            return;
+        }
+        $_SESSION['flash']['success'] = 'Account created. Please sign in.';
+        header('Location: ?action=login');
+    }
 }
