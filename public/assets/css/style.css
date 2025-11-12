@@ -1,4 +1,6 @@
 /* ==== Tema Dasar & Variabel ==== */
+/* Gunakan Comic Neue (sans-comic yang modern) untuk tampilan lebih playful */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
 :root{
     --max-width:1100px;
     --accent:#4f46e5;
@@ -11,14 +13,22 @@
     --danger:#ef4444;
     --success:#10b981;
     --glass: rgba(255,255,255,0.6);
+    /* Tipografi: Comic Neue (Google Fonts) sebagai font utama */
+    --font-sans: 'Comic Neue', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --font-heading: 'Comic Neue', var(--font-sans);
+    --base-font-size: 16px;
+    --lead-size: 1.05rem;
 }
 
 /* ==== Reset ==== */
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    font-size:16px;line-height:1.45;
+    font-family: var(--font-sans);
+    font-size: var(--base-font-size);
+    line-height:1.45;
     color:#0f172a;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
 
     /* ==== GUNAKAN FOTO LATAR BELAKANG ==== */
     background-image:url("images.jpg"); 
@@ -38,6 +48,38 @@ body::before{
     background:rgba(0, 51, 153, 0.45); /* filter biru transparan */
     backdrop-filter:blur(2px);
     z-index:-1;
+}
+
+/* ==== Tipografi: Heading & Readability ==== */
+h1,h2,h3,h4{
+    font-family:var(--font-heading);
+    color:var(--accent-600);
+    margin:0 0 .6rem;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.12;
+}
+h1{ font-size: clamp(1.6rem, 4vw, 2.5rem); }
+h2{ font-size: clamp(1.25rem, 2.6vw, 1.6rem); }
+h3{ font-size: clamp(1.05rem, 2.0vw, 1.25rem); }
+h4{ font-size: 1rem; }
+
+/* Container yang memudahkan keterbacaan artikel/text-heavy */
+.prose{
+    max-width:65ch;
+    margin:0 auto;
+    font-size:1rem;
+    line-height:1.65;
+    color:rgba(15,23,42,0.95);
+}
+.prose p{ margin:0 0 1.05rem; }
+
+/* Latar putih semi-transparan untuk meningkatkan kontras di atas background image */
+.surface{
+    background: rgba(255,255,255,0.9);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(2,6,23,0.06);
 }
 
 /* ==== Wrapper ==== */
