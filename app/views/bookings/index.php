@@ -17,7 +17,7 @@
                     <th>End</th>
                     <th>Status</th>
                     <?php if (!empty($_SESSION['role_id']) && $_SESSION['role_id'] == 1): ?>
-                        <th>Actions</th>
+                        <th class="actions">Actions</th>
                     <?php endif; ?>
                 </tr>
             </thead>
@@ -30,9 +30,9 @@
                     <td><?php echo htmlspecialchars($b['room_name']); ?></td>
                     <td><?php echo htmlspecialchars($b['start_time']); ?></td>
                     <td><?php echo htmlspecialchars($b['end_time']); ?></td>
-                    <td><?php echo htmlspecialchars($b['status']); ?></td>
+                    <td><span class="status-badge <?php echo htmlspecialchars($b['status']); ?>"><?php echo htmlspecialchars($b['status']); ?></span></td>
                     <?php if (!empty($_SESSION['role_id']) && $_SESSION['role_id'] == 1): ?>
-                        <td>
+                        <td class="actions">
                             <?php if ($b['status'] === 'pending'): ?>
                                 <form method="post" action="?action=booking_action" style="display:inline">
                                     <input type="hidden" name="_csrf" value="<?php echo csrf_token(); ?>">

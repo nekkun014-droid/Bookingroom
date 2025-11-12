@@ -79,5 +79,5 @@ table.responsive-table th,table.responsive-table td{padding:.5rem;border:1px sol
     .main-nav{margin-left:1rem}
 }
 
-/* Focus visible for accessibility */
-:focus{outline:3px solid rgba(0,102,204,.25);outline-offset:2px}
+/* ==== Fokus ==== */
+:focus{outline:3px solid rgba(79,70,229,0.25);outline-offset:2px;}
