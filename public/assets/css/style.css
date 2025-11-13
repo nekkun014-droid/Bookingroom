@@ -207,7 +207,7 @@ input:focus,textarea:focus,select:focus{
     border-color:var(--accent-400);
     box-shadow:0 0 0 4px rgba(79,70,229,0.12);
 }
-<<<<<<< HEAD
+HEAD
 
 /* ==== Perbaikan Kontras Teks ==== */
 /* Pastikan elemen dengan latar terang menampilkan teks gelap untuk keterbacaan */
@@ -217,6 +217,27 @@ input,select,textarea,
 .modal-content,
 .prose{
     color: var(--text-dark);
+}
+
+/* Pastikan teks "muted" pada permukaan terang cukup gelap untuk terbaca */
+.surface .muted,
+.room-card .muted,
+.modal-content .muted,
+.auth-card .muted,
+.prose .muted,
+.export-section .muted{
+    color: rgba(15,23,42,0.65);
+}
+
+/* Placeholder teks pada input agar terlihat di latar putih */
+input::placeholder, textarea::placeholder {
+    color: rgba(15,23,42,0.45);
+    opacity: 1; /* Override browser opacity */
+}
+
+/* Labels and small text on light surfaces */
+.surface label, .surface small, .auth-card label, .auth-card small, .room-card label, .room-card small {
+    color: rgba(15,23,42,0.75);
 }
 
 /* Modal content: gunakan latar hampir-putih untuk keterbacaan teks di atas gambar */
