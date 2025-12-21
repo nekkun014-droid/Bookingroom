@@ -12,3 +12,6 @@ define('DB_PASS', '');
 // Other
 define('SESSION_NAME', 'mini_booking_session');
 define('CSRF_TOKEN_KEY', '_csrf_token');
+
+// JWT Secret - CHANGE THIS IN PRODUCTION!
+define('JWT_SECRET', 'your-secret-key-change-this-in-production-booking-room-2024');
