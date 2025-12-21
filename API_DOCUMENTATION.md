@@ -2,7 +2,7 @@
 
 Base URL: `http://localhost/Bookingroom/public/api`
 
-## Authentication
+## Authentication//
 
 Most endpoints require authentication using Bearer token in the Authorization header:
 ```
