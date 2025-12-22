@@ -28,6 +28,18 @@ CREATE TABLE IF NOT EXISTS rooms (
   created_at DATETIME
 );
 
+INSERT INTO rooms (name, location, capacity, created_at) VALUES
+('Ruang Mawar', 'Lantai 1, Sayap Barat', 10, NOW()),
+('Ruang Melati', 'Lantai 1, Sayap Timur', 8, NOW()),
+('Aula Serbaguna', 'Lantai Dasar', 100, NOW()),
+('Ruang Lab Komputer', 'Lantai 2', 30, NOW()),
+('Executive Boardroom', 'Lantai 5', 15, NOW()),
+('Ruang Diskusi A', 'Perpustakaan Lt. 1', 5, NOW()),
+('Ruang Diskusi B', 'Perpustakaan Lt. 1', 5, NOW()),
+('Cinema Room', 'Basement 1', 25, NOW()),
+('Creative Studio', 'Lantai 3', 12, NOW()),
+('Main Hall', 'Lantai Dasar', 250, NOW());
+
 -- bookings
 CREATE TABLE IF NOT EXISTS bookings (
   id INT AUTO_INCREMENT PRIMARY KEY,
