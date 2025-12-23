@@ -17,10 +17,10 @@
                 <form method="post" action="?action=logout" style="display:inline">
                     <button type="submit" class="btn btn--secondary">Logout</button>
                 </form>
+                <button id="apiLogout" class="btn btn--secondary" style="margin-left:.5rem">Clear API token</button>
             <?php else: ?>
-                <!-- Intentionally hide Login/Register from header for a focused auth page UX.
-                     Users will be redirected to a dedicated login/register page. -->
-                <span class="sr-only">Not signed in</span>
+                <a class="btn btn--secondary" href="?action=login">Login</a>
+                <a class="btn" href="?action=register" style="margin-left:.5rem">Register</a>
             <?php endif; ?>
         </div>
     </div>
