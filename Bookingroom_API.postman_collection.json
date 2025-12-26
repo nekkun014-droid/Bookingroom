@@ -29,7 +29,22 @@
               "path": ["auth", "register"]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "201 Created - Registration",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {"mode": "raw"}
+              },
+              "status": "Created",
+              "code": 201,
+              "_header": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Registration successful\",\n  \"data\": {\n    \"token\": \"YOUR_JWT_TOKEN_HERE\",\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john@example.com\",\n      \"role_id\": 2\n    }\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Login",
@@ -65,7 +80,16 @@
               "path": ["auth", "login"]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK - Login",
+              "originalRequest": {"method": "POST"},
+              "status": "OK",
+              "code": 200,
+              "_header": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Login successful\",\n  \"data\": {\n    \"token\": \"YOUR_JWT_TOKEN_HERE\",\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john@example.com\",\n      \"role_id\": 2\n    }\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Get Current User",
@@ -83,7 +107,16 @@
               "path": ["auth", "me"]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK - Get Current User",
+              "originalRequest": {"method": "GET"},
+              "status": "OK",
+              "code": 200,
+              "_header": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"User retrieved successfully\",\n  \"data\": {\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john@example.com\",\n      \"role_id\": 2\n    }\n  }\n}"
+            }
+          ]
         }
       ]
     },
@@ -116,7 +149,16 @@
               ]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK - Rooms List",
+              "originalRequest": {"method": "GET"},
+              "status": "OK",
+              "code": 200,
+              "_header": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Success\",\n  \"data\": {\n    \"rooms\": [\n      {\n        \"id\": 1,\n        \"name\": \"Meeting Room A\",\n        \"location\": \"Floor 1\",\n        \"capacity\": 10,\n        \"created_at\": \"2024-01-01 10:00:00\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": 1,\n      \"per_page\": 10,\n      \"total\": 1,\n      \"total_pages\": 1,\n      \"has_next\": false,\n      \"has_prev\": false\n    }\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Get Room Details",
@@ -129,7 +171,16 @@
               "path": ["rooms", "1"]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK - Bookings List",
+              "originalRequest": {"method": "GET"},
+              "status": "OK",
+              "code": 200,
+              "_header": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Success\",\n  \"data\": {\n    \"bookings\": [\n      {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"user_name\": \"John Doe\",\n        \"room_id\": 1,\n        \"room_name\": \"Meeting Room A\",\n        \"start_time\": \"2024-12-25 09:00:00\",\n        \"end_time\": \"2024-12-25 11:00:00\",\n        \"status\": \"pending\",\n        \"created_at\": \"2024-12-20 10:00:00\"\n      }\n    ]\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Create Room (Admin)",
@@ -155,7 +206,16 @@
               "path": ["rooms"]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "201 Created - Booking Created",
+              "originalRequest": {"method": "POST"},
+              "status": "Created",
+              "code": 201,
+              "_header": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Booking created successfully\",\n  \"data\": {\n    \"booking_id\": 15\n  }\n}"
+            }
+          ]
         }
       ]
     },
@@ -178,7 +238,16 @@
               "path": ["bookings"]
             }
           },
-          "response": []
+          "response": [
+            {
+              "name": "200 OK - Timeslots List",
+              "originalRequest": {"method": "GET"},
+              "status": "OK",
+              "code": 200,
+              "_header": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Success\",\n  \"data\": {\n    \"timeslots\": [\n      {\n        \"id\": 1,\n        \"name\": \"Morning Slot\",\n        \"start_time\": \"09:00:00\",\n        \"end_time\": \"12:00:00\",\n        \"created_at\": \"2024-01-01 10:00:00\"\n      }\n    ]\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Get Booking Details",

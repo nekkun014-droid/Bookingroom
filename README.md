@@ -276,6 +276,11 @@ Dashboard (Admin) → Click "Bookings"
   → Lihat booking dari semua user
   → Approve / Reject / Cancel booking
 ```
+## 🔗 API
+
+Dokumentasi lengkap untuk penggunaan API tersedia pada file [API_DOCUMENTATION.md](API_DOCUMENTATION.md).
+
+Gunakan dokumentasi tersebut untuk detail endpoint, contoh request `curl`, format token, dan aturan autentikasi.
 
 ### Password Recovery
 
