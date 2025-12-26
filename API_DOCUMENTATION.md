@@ -587,3 +587,95 @@ To test admin endpoints, you need to manually set `role_id = 1` in the database:
 ```sql
 UPDATE users SET role_id = 1 WHERE email = 'your-admin@example.com';
 ```
+# Bookingroom API Documentation
+
+Panduan singkat ini menjelaskan cara menggunakan API pada proyek Bookingroom.
+
+Base URL
+- API diakses melalui entrypoint `public/api.php` dengan prefix `/api`. Contoh: `https://example.com/api/`
+
+Autentikasi
+- Registrasi: `POST /auth/register` dengan JSON body: `{ "name": "Nama", "email": "email@example.com", "password": "secret" }`.
+- Login: `POST /auth/login` dengan JSON body: `{ "email": "email@example.com", "password": "secret" }`.
+- Semua endpoint yang membutuhkan autentikasi mengharuskan header:
+  - `Authorization: Bearer <token>`
+- Token: aplikasi menggunakan token mirip JWT dengan header.payload.signature. Token kadaluarsa 7 hari.
+
+Format response
+- Semua response API dikembalikan sebagai JSON dengan struktur umum:
+
+  {
+    "success": true|false,
+    "message": "...",
+    "data": { ... }
+  }
+
+Endpoint utama
+
+- Auth
+  - `POST /auth/register` — Registrasi user baru.
+  - `POST /auth/login` — Login dan menerima `token`.
+  - `GET /auth/me` — Mengambil data user saat ini (memerlukan token).
+
+- Rooms
+  - `GET /rooms` — Daftar ruangan. Mendukung query params: `page`, `per_page`, `search`.
+  - `GET /rooms/{id}` — Detail ruangan.
+  - `POST /rooms` — Buat ruangan baru (admin saja). Body JSON: `{ "name": "...", "location": "...", "capacity": 10 }`
+
+- Bookings
+  - `GET /bookings` — Daftar booking (memerlukan token). Admin melihat semua; user biasa hanya melihat miliknya.
+  - `GET /bookings/{id}` — Detail booking (memerlukan token).
+  - `POST /bookings` — Buat booking (memerlukan token). Body JSON: `{ "room_id": 1, "start_time": "YYYY-MM-DD HH:MM:SS", "end_time": "YYYY-MM-DD HH:MM:SS" }`
+  - `PUT /bookings/{id}/status` — Update status booking (admin saja). Body JSON: `{ "status": "approved"|"rejected"|"pending" }`
+  - `DELETE /bookings/{id}` — Hapus booking (admin atau pemilik booking).
+
+- Timeslots
+  - `GET /timeslots` — Daftar timeslot.
+  - `GET /timeslots/{id}` — Detail timeslot.
+  - `POST /timeslots` — Buat timeslot (admin). Body JSON: `{ "name":"..", "start_time":"HH:MM:SS", "end_time":"HH:MM:SS" }`
+  - `PUT /timeslots/{id}` — Update timeslot (admin).
+  - `DELETE /timeslots/{id}` — Hapus timeslot (admin).
+
+Contoh penggunaan (curl)
+
+- Register
+
+```bash
+curl -X POST https://example.com/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Budi","email":"budi@example.com","password":"secret"}'
+```
+
+- Login
+
+```bash
+curl -X POST https://example.com/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"budi@example.com","password":"secret"}'
+```
+
+- Mengambil daftar rooms
+
+```bash
+curl https://example.com/api/rooms
+```
+
+- Membuat booking (setelah login)
+
+```bash
+curl -X POST https://example.com/api/bookings \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
+  -d '{"room_id":1,"start_time":"2025-12-30 09:00:00","end_time":"2025-12-30 10:00:00"}'
+```
+
+Catatan penting
+- Beberapa endpoint memerlukan hak admin (role_id = 1). Pastikan user yang melakukan request memiliki peran tersebut.
+- Format tanggal/waktu untuk booking: `YYYY-MM-DD HH:MM:SS`.
+- Format waktu untuk timeslot: `HH:MM:SS`.
+- Validasi dan error: server mengembalikan status code yang sesuai (400, 401, 403, 404, 409, 500) dan pesan di field `message`.
+
+Konfigurasi lokal
+- Sesuaikan `app/config/db.php` untuk koneksi database dan impor `schema.sql` atau `dump.sql` untuk membuat tabel.
+
+Jika butuh dokumentasi lebih rinci (contoh response, skema database, contoh request lengkap), beri tahu saya agar saya lengkapi.
